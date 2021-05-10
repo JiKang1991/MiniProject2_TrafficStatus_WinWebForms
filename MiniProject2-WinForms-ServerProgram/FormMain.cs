@@ -15,7 +15,7 @@ namespace MiniProject2_WinForms_ServerProgram
 {
     public partial class FormMain : Form
     {
-        //Socket serverSocket = null;
+        Socket serverSocket = null;
         Socket socket = null;
         Thread serverThread = null;
         Thread receiptThread = null;
