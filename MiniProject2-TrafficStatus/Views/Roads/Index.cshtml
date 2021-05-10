@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MiniProject2_TrafficStatus.Models.Road>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.roadNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.roadName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startLocX)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.startLocY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.finishLocX)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.finishLocY)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.roadNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.roadName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.startLocX)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.startLocY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.finishLocX)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.finishLocY)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
