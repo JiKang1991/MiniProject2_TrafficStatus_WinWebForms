@@ -55,7 +55,7 @@ namespace MiniProject2_WinForms_VirtualCar
             }
             else
             {
-                 //cb.Text;
+                return cb.Text;
             }
             
         }
