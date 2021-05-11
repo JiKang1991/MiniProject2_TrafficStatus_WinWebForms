@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MiniProject2_TrafficStatus.Models.Traffic_Status>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.r_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ts_speed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ts_loc_x)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ts_loc_y)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.time)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.r_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ts_speed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ts_loc_x)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ts_loc_y)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.time)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

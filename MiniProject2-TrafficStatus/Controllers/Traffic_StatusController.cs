@@ -11,113 +11,115 @@ using MiniProject2_TrafficStatus.Models;
 
 namespace MiniProject2_TrafficStatus.Controllers
 {
-    public class RoadsController : Controller
+    public class Traffic_StatusController : Controller
     {
-        private RoadDAO db = new RoadDAO();
+        private TrafficStatusDAO db = new TrafficStatusDAO();
 
-        // GET: Roads
+        // GET: Traffic_Status
         public ActionResult Index()
         {
-            return View(db.Roads.ToList());
+            return View(db.tsDbSet.ToList());
         }
 
-        // GET: Roads/Details/5
+        // GET: Traffic_Status/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Road road = db.Roads.Find(id);
-            if (road == null)
+            Traffic_Status traffic_Status = db.tsDbSet.Find(id);
+            if (traffic_Status == null)
             {
                 return HttpNotFound();
             }
-            return View(road);
+            return View(traffic_Status);
         }
 
-        // GET: Roads/Create
+        // GET: Traffic_Status/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Roads/Create
+        // POST: Traffic_Status/Create
         // 초과 게시 공격으로부터 보호하려면 바인딩하려는 특정 속성을 사용하도록 설정하세요. 
         // 자세한 내용은 https://go.microsoft.com/fwlink/?LinkId=317598을(를) 참조하세요.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,roadNumber,roadName,startLocX,startLocY,finishLocX,finishLocY")] Road road)
+        public ActionResult Create([Bind(Include = "id,r_id,ts_speed,ts_loc_x,ts_loc_y,time")] Traffic_Status traffic_Status)
         {
             if (ModelState.IsValid)
             {
-                db.Roads.Add(road);
+                db.tsDbSet.Add(traffic_Status);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(road);
+            return View(traffic_Status);
         }
 
-        // GET: Roads/Edit/5
+        // GET: Traffic_Status/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Road road = db.Roads.Find(id);
-            if (road == null)
+            Traffic_Status traffic_Status = db.tsDbSet.Find(id);
+            if (traffic_Status == null)
             {
                 return HttpNotFound();
             }
-            return View(road);
+            return View(traffic_Status);
         }
 
-        // POST: Roads/Edit/5
+        // POST: Traffic_Status/Edit/5
         // 초과 게시 공격으로부터 보호하려면 바인딩하려는 특정 속성을 사용하도록 설정하세요. 
         // 자세한 내용은 https://go.microsoft.com/fwlink/?LinkId=317598을(를) 참조하세요.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,roadNumber,roadName,startLocX,startLocY,finishLocX,finishLocY")] Road road)
+        public ActionResult Edit([Bind(Include = "id,r_id,ts_speed,ts_loc_x,ts_loc_y,time")] Traffic_Status traffic_Status)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(road).State = EntityState.Modified;
+                db.Entry(traffic_Status).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(road);
+            return View(traffic_Status);
         }
 
-        // GET: Roads/Delete/5
+        // GET: Traffic_Status/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Road road = db.Roads.Find(id);
-            if (road == null)
+            Traffic_Status traffic_Status = db.tsDbSet.Find(id);
+            if (traffic_Status == null)
             {
                 return HttpNotFound();
             }
-            return View(road);
+            return View(traffic_Status);
         }
 
-        // POST: Roads/Delete/5
+        // POST: Traffic_Status/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Road road = db.Roads.Find(id);
-            db.Roads.Remove(road);
+            Traffic_Status traffic_Status = db.tsDbSet.Find(id);
+            db.tsDbSet.Remove(traffic_Status);            
             db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        public ActionResult StatusView()
-        {
+        public ActionResult RTStatusView()
+        {            
+            ViewBag.fabricationValue = db.GetFabricationValue(1);
+
             return View();
         }
 

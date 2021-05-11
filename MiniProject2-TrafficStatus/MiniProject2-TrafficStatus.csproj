@@ -126,13 +126,15 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Context\RoadDAO.cs" />
+    <Compile Include="Context\DbConnecter.cs" />
+    <Compile Include="Context\TrafficStatusDAO.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RoadsController.cs" />
+    <Compile Include="Controllers\Traffic_StatusController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Road.cs" />
+    <Compile Include="Models\FabricationValue.cs" />
+    <Compile Include="Models\Traffic_Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +148,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Resoucre\point.png" />
     <Content Include="Resoucre\road1.png" />
+    <Content Include="Resoucre\road2.png" />
+    <Content Include="Resoucre\road3.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -173,12 +177,12 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Roads\Create.cshtml" />
-    <Content Include="Views\Roads\Delete.cshtml" />
-    <Content Include="Views\Roads\Details.cshtml" />
-    <Content Include="Views\Roads\Edit.cshtml" />
-    <Content Include="Views\Roads\Index.cshtml" />
-    <Content Include="Views\Roads\StatusView.cshtml" />
+    <Content Include="Views\Traffic_Status\Create.cshtml" />
+    <Content Include="Views\Traffic_Status\Delete.cshtml" />
+    <Content Include="Views\Traffic_Status\Details.cshtml" />
+    <Content Include="Views\Traffic_Status\Edit.cshtml" />
+    <Content Include="Views\Traffic_Status\Index.cshtml" />
+    <Content Include="Views\Traffic_Status\RTStatusView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

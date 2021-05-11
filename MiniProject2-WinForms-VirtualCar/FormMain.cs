@@ -177,6 +177,7 @@ namespace MiniProject2_WinForms_VirtualCar
 
         private void timerProcess()
         {
+            //bool flag = true;
             while(true)
             {
                 int sec = int.Parse(DateTime.Now.ToString("ss"));
@@ -192,11 +193,12 @@ namespace MiniProject2_WinForms_VirtualCar
                     {
                         socket.Send(bArr);
                     }
+                    //flag = false;
                     Thread.Sleep(1000);
                 }
                 else
                 {
-                    //Thread.Sleep(100);
+                   Thread.Sleep(100);
                 }
                 
             }

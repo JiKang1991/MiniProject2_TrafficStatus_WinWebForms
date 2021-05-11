@@ -1,0 +1,1 @@
+﻿SELECT r_id, AVG(ts_speed) AS avg_speed , COUNT(id) AS count FROM traffic_status WHERE r_id = 1 GROUP BY r_id

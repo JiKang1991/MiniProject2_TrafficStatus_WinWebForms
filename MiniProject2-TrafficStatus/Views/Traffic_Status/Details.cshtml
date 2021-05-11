@@ -1,0 +1,58 @@
+﻿@model MiniProject2_TrafficStatus.Models.Traffic_Status
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Traffic_Status</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.r_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.r_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ts_speed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ts_speed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ts_loc_x)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ts_loc_x)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ts_loc_y)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ts_loc_y)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

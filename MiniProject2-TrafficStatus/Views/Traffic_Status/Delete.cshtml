@@ -1,0 +1,64 @@
+﻿@model MiniProject2_TrafficStatus.Models.Traffic_Status
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Traffic_Status</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.r_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.r_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ts_speed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ts_speed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ts_loc_x)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ts_loc_x)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ts_loc_y)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ts_loc_y)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.time)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

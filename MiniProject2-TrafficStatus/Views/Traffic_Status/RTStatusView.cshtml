@@ -1,0 +1,68 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--
+<script type="text/javascript">
+    var sec = parseInt(Date.now.toString(ss));
+    alert(sec);
+    
+    $(document).ready(function () {
+        /*
+        while (true) {
+        int sec = parseInt(Date.now.toString(ss));
+        if (sec % 10 == 5) {
+            renewalFabricationValue(1);
+        }
+
+    }
+        */
+    });
+    function renewalFabricationValue(id) {
+        $.ajax({
+            type: "get",
+            url: "~/Controllers/Traffic_Status/RTStatusView",
+            datatype: "json",
+            data: 'id=' + id,
+            success: function (renewalValue) {
+                fabricationValue = "";
+                fabricationValue += "<th>" + renewalValue.r_id + "</th>";
+                fabricationValue += "<th>" + renewalValue.avg_speed + "</th>";
+                fabricationValue += "<th>" + renewalValue.count + "</th>";
+                $("#fabricationValue").html(fabricationValue);
+            }
+
+        });
+    }
+</script>
+-->
+
+<table class="table">
+    <tr>
+       <td> @ViewBag.fabricationValue.r_id </td>
+    </tr>
+    <tr>
+        <td>
+            @if (ViewBag.fabricationValue.avg_speed > 40)
+            {
+                <img src="~/Resoucre/road1.png" />
+            }
+            else if (ViewBag.fabricationValue.avg_speed > 20)
+            {
+                <img src="~/Resoucre/road3.png" />
+            }
+            else if (ViewBag.favricatonValue.ave_speed >= 0)
+            {
+                <img src="~/Resoucre/road2.png" />
+            }
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @ViewBag.fabricationValue.count
+        </td>        
+    </tr>
+</table>
+
+
+
