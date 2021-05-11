@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div style="margin: auto; position: relative;">
+        <video src="~/Resoucre/Paris - 8132.mp4" autoplay muted loop style="width: 100%;"></video>
+        <div style="position: absolute; width: 100%; top: 30%; left: 50%; transform: translate(-50%, -50%);">
+            <p style="text-align: center; font-size: 70px; color: #ffffff">Traffic Status</p>
+        </div>
+        <div style="display:block; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <form method="Post" action="~/Traffic_Status/RTStatusView">
+                <select name="selectbox" style="text-align: center;  width: 400px">
+                    <option value="">실시간 상태 조회를 희망하는 도로를 선택하세요.</option>
+                    <option value="1">OO 고속도로</option>
+                </select>
+                <input type="submit" value="조회" />
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -116,6 +116,10 @@ namespace MiniProject2_TrafficStatus.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult MainDoor()
+        {
+            return View();
+        }
         public ActionResult RTStatusView()
         {            
             ViewBag.fabricationValue = db.GetFabricationValue(1);

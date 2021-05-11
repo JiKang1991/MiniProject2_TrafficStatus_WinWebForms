@@ -52,7 +52,9 @@
       <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
@@ -146,6 +148,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Resoucre\Paris - 8132.mp4" />
     <Content Include="Resoucre\point.png" />
     <Content Include="Resoucre\road1.png" />
     <Content Include="Resoucre\road2.png" />
@@ -182,6 +185,7 @@
     <Content Include="Views\Traffic_Status\Details.cshtml" />
     <Content Include="Views\Traffic_Status\Edit.cshtml" />
     <Content Include="Views\Traffic_Status\Index.cshtml" />
+    <Content Include="Views\Traffic_Status\MainDoor.cshtml" />
     <Content Include="Views\Traffic_Status\RTStatusView.cshtml" />
   </ItemGroup>
   <ItemGroup>

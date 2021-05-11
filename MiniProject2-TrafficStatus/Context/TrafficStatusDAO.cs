@@ -12,7 +12,7 @@ namespace MiniProject2_TrafficStatus.Context
     {
         public DbSet<Traffic_Status> tsDbSet { get; set; }
 
-        public TrafficStatusDAO() : base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\kosta\C#\trafficStatus.mdf;Integrated Security=True;Connect Timeout=30")
+        public TrafficStatusDAO() : base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Coding\MiniProject2_TrafficStatus_WinWebForms\TrafficStatus.mdf;Integrated Security=True;Connect Timeout=30")
         {
 
         }
@@ -23,7 +23,7 @@ namespace MiniProject2_TrafficStatus.Context
             {
                 FabricationValue fabricationValue = new FabricationValue();
 
-                DbConnecter dbConnecter = new DbConnecter(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\kosta\C#\trafficStatus.mdf;Integrated Security=True;Connect Timeout=30");
+                DbConnecter dbConnecter = new DbConnecter(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Coding\MiniProject2_TrafficStatus_WinWebForms\TrafficStatus.mdf;Integrated Security=True;Connect Timeout=30");
 
                 string sql = $"SELECT r_id, AVG(ts_speed) AS avg_speed , COUNT(id) AS count FROM traffic_status WHERE r_id = {id} GROUP BY r_id";
 

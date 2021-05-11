@@ -1,68 +1,79 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<!--
-<script type="text/javascript">
-    var sec = parseInt(Date.now.toString(ss));
-    alert(sec);
-    
-    $(document).ready(function () {
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript">
         /*
-        while (true) {
-        int sec = parseInt(Date.now.toString(ss));
-        if (sec % 10 == 5) {
-            renewalFabricationValue(1);
-        }
+        $(document).ready(function () {
 
-    }
-        */
-    });
-    function renewalFabricationValue(id) {
-        $.ajax({
-            type: "get",
-            url: "~/Controllers/Traffic_Status/RTStatusView",
-            datatype: "json",
-            data: 'id=' + id,
-            success: function (renewalValue) {
-                fabricationValue = "";
-                fabricationValue += "<th>" + renewalValue.r_id + "</th>";
-                fabricationValue += "<th>" + renewalValue.avg_speed + "</th>";
-                fabricationValue += "<th>" + renewalValue.count + "</th>";
-                $("#fabricationValue").html(fabricationValue);
+
+            while (true) {
+                var date = new Date();
+                if (date.getSeconds() % 10 == 5) {
+                    renewalFabricationValue(1);
+
+                }
             }
-
         });
-    }
-</script>
--->
 
-<table class="table">
-    <tr>
-       <td> @ViewBag.fabricationValue.r_id </td>
-    </tr>
-    <tr>
-        <td>
-            @if (ViewBag.fabricationValue.avg_speed > 40)
-            {
-                <img src="~/Resoucre/road1.png" />
-            }
-            else if (ViewBag.fabricationValue.avg_speed > 20)
-            {
-                <img src="~/Resoucre/road3.png" />
-            }
-            else if (ViewBag.favricatonValue.ave_speed >= 0)
-            {
-                <img src="~/Resoucre/road2.png" />
-            }
-        </td>
-    </tr>
-    <tr>
-        <td>
-            @ViewBag.fabricationValue.count
-        </td>        
-    </tr>
-</table>
+        function renewalFabricationValue(id) {
+            alert("111");
+            $.ajax({
+                type: "get",
+                url: "~/Controllers/Traffic_Status/RTStatusView",
+                datatype: "json",
+                data: 'id=' + id,
+                success: function (renewalValue) {
+                    fabricationValue = "";
+                    fabricationValue += "<tr><td>" + renewalValue.r_id + "</td>";
+                    fabricationValue += "<tr><td>" + renewalValue.avg_speed + "</td>";
+                    fabricationValue += "<tr><td>" + renewalValue.count + "</td>";
+                    $("#fabricationValue").html(fabricationValue);
+                }
 
-
-
+            });
+        }
+        */
+    </script>
+</head>
+<body>
+    <div>
+        <table class="table">
+            <tbody id="fabricationValue">
+                <tr>
+                    <td> @ViewBag.fabricationValue.r_id </td>
+                </tr>
+                <tr>
+                    <td>
+                        @if (ViewBag.fabricationValue.avg_speed > 40)
+                        {
+                            <img src="~/Resoucre/road1.png" />
+                        }
+                        else if (ViewBag.fabricationValue.avg_speed > 20)
+                        {
+                            <img src="~/Resoucre/road3.png" />
+                        }
+                        else if (ViewBag.fabricationValue.avg_speed >= 0)
+                        {
+                            <img src="~/Resoucre/road2.png" />
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @ViewBag.fabricationValue.count
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

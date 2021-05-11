@@ -27,7 +27,7 @@ namespace MiniProject2_WinForms_ServerProgram
         IAsyncResult ar;
         bool pending = false;
 
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\kosta\C#\trafficStatus.mdf;Integrated Security=True;Connect Timeout=30";
+        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Coding\MiniProject2_TrafficStatus_WinWebForms\TrafficStatus.mdf;Integrated Security=True;Connect Timeout=30";
         DbConnecter receiptDbConnecter;
         DbConnecter fabricationDbConnecter;
 
@@ -117,6 +117,7 @@ namespace MiniProject2_WinForms_ServerProgram
 
         private void serverProcess()
         {
+            /*
             if (fabricationThread != null)
             {
                 fabricationThread.Abort();
@@ -125,7 +126,7 @@ namespace MiniProject2_WinForms_ServerProgram
             fabricationThread = new Thread(fabricationProcess);
             fabricationThread.IsBackground = true;
             fabricationThread.Start();
-
+            */
             IPAddress ipAddress = new IPAddress(ip);
             IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, int.Parse(FormSet.serverPort));
             serverSocket.Bind(ipEndPoint);
@@ -159,7 +160,13 @@ namespace MiniProject2_WinForms_ServerProgram
             PrintStatus($"{speed} {locationX} {locationY} {roadId} {sTime}");
 
             string sql = "";
-            
+
+            sql = "DELETE FROM traffic_status";
+            fabricationDbConnecter.RunSql(sql);
+
+            sql = "DBCC CHECKIDENT('traffic_status', RESEED, 0)";
+            fabricationDbConnecter.RunSql(sql);
+
 
             sql = $"INSERT INTO traffic_status(r_id, ts_speed, ts_loc_x, ts_loc_y, time)" +
                 $" VALUES('{roadId}', '{speed}', '{locationX}', '{locationY}', '{sTime}')";
