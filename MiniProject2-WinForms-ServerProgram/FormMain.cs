@@ -19,7 +19,6 @@ namespace MiniProject2_WinForms_ServerProgram
         Socket socket = null;
         Thread serverThread = null;
         Thread receiptThread = null;
-        Thread fabricationThread = null;
         List<Socket> list = new List<Socket>();
 
         byte[] ip = { 0, 0, 0, 0 };
@@ -27,7 +26,7 @@ namespace MiniProject2_WinForms_ServerProgram
         IAsyncResult ar;
         bool pending = false;
 
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Coding\MiniProject2_TrafficStatus_WinWebForms\TrafficStatus.mdf;Integrated Security=True;Connect Timeout=30";
+        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\kosta\C#\trafficStatus.mdf;Integrated Security=True;Connect Timeout=30";
         DbConnecter receiptDbConnecter;
         DbConnecter fabricationDbConnecter;
 
@@ -116,17 +115,7 @@ namespace MiniProject2_WinForms_ServerProgram
         }
 
         private void serverProcess()
-        {
-            /*
-            if (fabricationThread != null)
-            {
-                fabricationThread.Abort();
-                fabricationThread = null;
-            }
-            fabricationThread = new Thread(fabricationProcess);
-            fabricationThread.IsBackground = true;
-            fabricationThread.Start();
-            */
+        {            
             IPAddress ipAddress = new IPAddress(ip);
             IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, int.Parse(FormSet.serverPort));
             serverSocket.Bind(ipEndPoint);
@@ -159,14 +148,7 @@ namespace MiniProject2_WinForms_ServerProgram
 
             PrintStatus($"{speed} {locationX} {locationY} {roadId} {sTime}");
 
-            string sql = "";
-
-            sql = "DELETE FROM traffic_status";
-            fabricationDbConnecter.RunSql(sql);
-
-            sql = "DBCC CHECKIDENT('traffic_status', RESEED, 0)";
-            fabricationDbConnecter.RunSql(sql);
-
+            string sql = "";            
 
             sql = $"INSERT INTO traffic_status(r_id, ts_speed, ts_loc_x, ts_loc_y, time)" +
                 $" VALUES('{roadId}', '{speed}', '{locationX}', '{locationY}', '{sTime}')";
@@ -188,46 +170,21 @@ namespace MiniProject2_WinForms_ServerProgram
                         PrintStatus(car + "번 차량으로부터 데이터가 전송되었습니다.");
                         byte[] bArr = new byte[list[i].Available];
                         list[i].Receive(bArr);
-                        //PrintStatus(Encoding.Default.GetString(bArr));
+
+                        if (i == 0)
+                        {
+                            string sql = "";
+                            sql = "DELETE FROM traffic_status";
+                            fabricationDbConnecter.RunSql(sql);
+
+                            sql = "DBCC CHECKIDENT('traffic_status', RESEED, 0)";
+                            fabricationDbConnecter.RunSql(sql);
+                        }
                         receiptProcedure(socket, bArr);
                     }
                 }
                 Thread.Sleep(100);
             }
-        }
-
-        private void fabricationProcess()
-        {
-            while (true)
-            {
-                int sec = int.Parse(DateTime.Now.ToString("ss"));
-                if(sec % 10 == 9)
-                {
-                    string sql = "";
-                    sql = "SELECT COUNT(*) FROM traffic_status";
-                    
-                    int count = (int)fabricationDbConnecter.Get(sql);
-                    if(count == 0)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-
-                        //sql = "SELECT count(distinct r_id) FROM traffic_status";
-                        //int roadCount = (int)fabricationDbConnecter.Get(sql);
-                        //MessageBox.Show($"{roadCount}");
-
-                        sql = "DELETE FROM traffic_status";
-                        fabricationDbConnecter.RunSql(sql);
-
-                        sql = "DBCC CHECKIDENT('traffic_status', RESEED, 0)";
-                        fabricationDbConnecter.RunSql(sql);
-                    }
-                }
-
-
-            }
-        }
+        }        
     }    
 }

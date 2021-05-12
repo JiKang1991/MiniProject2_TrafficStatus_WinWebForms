@@ -118,11 +118,14 @@ namespace MiniProject2_TrafficStatus.Controllers
 
         public ActionResult MainDoor()
         {
+            ViewBag.roadName = db.GetRoadName();
+
             return View();
         }
-        public ActionResult RTStatusView()
-        {            
-            ViewBag.fabricationValue = db.GetFabricationValue(1);
+        public ActionResult RTStatusView(int roadId)
+        {   
+            
+            ViewBag.fabricationValue = db.GetFabricationValue(roadId);
 
             return View();
         }

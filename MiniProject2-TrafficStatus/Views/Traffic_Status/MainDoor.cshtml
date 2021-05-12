@@ -16,10 +16,14 @@
             <p style="text-align: center; font-size: 70px; color: #ffffff">Traffic Status</p>
         </div>
         <div style="display:block; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-            <form method="Post" action="~/Traffic_Status/RTStatusView">
-                <select name="selectbox" style="text-align: center;  width: 400px">
+            <form method="get" action="~/Traffic_Status/RTStatusView">
+                <select name="roadId" style="text-align: center;  width: 400px">
                     <option value="">실시간 상태 조회를 희망하는 도로를 선택하세요.</option>
-                    <option value="1">OO 고속도로</option>
+                    @for(int i = 0; i < ViewBag.roadName.Count; i++)
+                    {
+                        int roadId = i + 1;
+                        <option value=@roadId>@ViewBag.roadName[i]</option>
+                    }
                 </select>
                 <input type="submit" value="조회" />
             </form>

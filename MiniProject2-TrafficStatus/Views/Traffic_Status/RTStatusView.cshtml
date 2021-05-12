@@ -1,5 +1,11 @@
 ﻿@{
     Layout = null;
+    ViewBag.fabricationValue.TryGetValue("r_name", out object rName);
+    ViewBag.fabricationValue.TryGetValue("r_in_cross", out object rInCross);
+    ViewBag.fabricationValue.TryGetValue("r_out_cross", out object rOutCross);
+    ViewBag.fabricationValue.TryGetValue("avg_speed", out object avgSpeed);
+    ViewBag.fabricationValue.TryGetValue("count", out object count);
+    
 }
 
 <!DOCTYPE html>
@@ -9,71 +15,54 @@
     <meta name="viewport" content="width=device-width" />
     <title></title>
 
-    @Scripts.Render("~/bundles/jquery")
-    <script type="text/javascript">
-        /*
-        $(document).ready(function () {
+    @Scripts.Render("~/bundles/bootstrap")
 
-
-            while (true) {
-                var date = new Date();
-                if (date.getSeconds() % 10 == 5) {
-                    renewalFabricationValue(1);
-
-                }
-            }
-        });
-
-        function renewalFabricationValue(id) {
-            alert("111");
-            $.ajax({
-                type: "get",
-                url: "~/Controllers/Traffic_Status/RTStatusView",
-                datatype: "json",
-                data: 'id=' + id,
-                success: function (renewalValue) {
-                    fabricationValue = "";
-                    fabricationValue += "<tr><td>" + renewalValue.r_id + "</td>";
-                    fabricationValue += "<tr><td>" + renewalValue.avg_speed + "</td>";
-                    fabricationValue += "<tr><td>" + renewalValue.count + "</td>";
-                    $("#fabricationValue").html(fabricationValue);
-                }
-
-            });
-        }
-        */
-    </script>
 </head>
 <body>
-    <div>
-        <table class="table">
-            <tbody id="fabricationValue">
-                <tr>
-                    <td> @ViewBag.fabricationValue.r_id </td>
-                </tr>
-                <tr>
-                    <td>
-                        @if (ViewBag.fabricationValue.avg_speed > 40)
-                        {
-                            <img src="~/Resoucre/road1.png" />
-                        }
-                        else if (ViewBag.fabricationValue.avg_speed > 20)
-                        {
-                            <img src="~/Resoucre/road3.png" />
-                        }
-                        else if (ViewBag.fabricationValue.avg_speed >= 0)
-                        {
-                            <img src="~/Resoucre/road2.png" />
-                        }
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @ViewBag.fabricationValue.count
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <div style="margin: auto; position: relative;">
+       <video src="~/Resoucre/Paris - 8132.mp4" autoplay muted loop style="width: 100%;"></video>
+       <div style="display:block; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; height: 50%;">
+           <table style="background-color: white; width: 100%; height:100%">
+               <tr>
+                   <td colspan="4">도로 명 : @rName.ToString()</td>
+                   <td colspan="2">시작 위치 : @rInCross.ToString()</td>
+                   <td colspan="4">종료 위치 : @rOutCross.ToString()</td>
+               </tr>
+               <tr>
+                   <td colspan="10">count : @count.ToString()</td>
+               </tr>
+               <tr>
+                   <td colspan="10">speed average(km/h) : @avgSpeed</td>
+               </tr>
+               <tr>
+                   <td colspan="2" style="width: 20%"></td>
+                   <td rowspan="3" colspan="4">
+                       @if ((decimal)avgSpeed > 40)
+                       {
+                           <img src="~/Resoucre/road1.png" />
+                       }
+                       else if ((decimal)avgSpeed > 20)
+                       {
+                           <img src="~/Resoucre/road3.png" />
+                       }
+                       else if ((decimal)avgSpeed >= 0)
+                       {
+                           <img src="~/Resoucre/road2.png" />
+                       }
+                   </td>
+                   <td colspan="2" style="width: 20%"></td>
+               </tr>
+               <tr>
+                   <td colspan="2"></td>
+                   <td colspan="2"></td>
+               </tr>
+               <tr>
+                   <td colspan="2"></td>
+                   <td colspan="2"></td>
+               </tr>
+           </table>
+       </div>
+    </div>  
+    
 </body>
 </html>

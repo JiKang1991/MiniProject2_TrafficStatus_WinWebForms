@@ -12,39 +12,49 @@ namespace MiniProject2_TrafficStatus.Context
     {
         public DbSet<Traffic_Status> tsDbSet { get; set; }
 
-        public TrafficStatusDAO() : base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Coding\MiniProject2_TrafficStatus_WinWebForms\TrafficStatus.mdf;Integrated Security=True;Connect Timeout=30")
+        public TrafficStatusDAO() : base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\kosta\C#\trafficStatus.mdf;Integrated Security=True;Connect Timeout=30")
         {
 
         }
 
-        public FabricationValue GetFabricationValue(int id)
+        public Dictionary<string, object> GetFabricationValue(int id)
         {
-            try
-            {
-                FabricationValue fabricationValue = new FabricationValue();
+            
+            Dictionary<string, object> dicFabricationValue = new Dictionary<string, object>();
+            
+            DbConnecter dbConnecter = new DbConnecter(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\kosta\C#\trafficStatus.mdf;Integrated Security=True;Connect Timeout=30");
+                  
 
-                DbConnecter dbConnecter = new DbConnecter(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Coding\MiniProject2_TrafficStatus_WinWebForms\TrafficStatus.mdf;Integrated Security=True;Connect Timeout=30");
+            string sql = $"SELECT f.r_id, f.avg_speed, f.count, r.r_name, r.r_out_cross, r.r_in_cross FROM " +
+                        $"(SELECT r_id, AVG(ts_speed) AS avg_speed , COUNT(id) AS count FROM traffic_status WHERE r_id = {id} GROUP BY r_id) f JOIN road_data r " +
+                        $"ON f.r_id = r.r_id WHERE r.r_id = {id}";
 
-                string sql = $"SELECT r_id, AVG(ts_speed) AS avg_speed , COUNT(id) AS count FROM traffic_status WHERE r_id = {id} GROUP BY r_id";
+            DataTable dataTable = (DataTable)dbConnecter.RunSql(sql);
+                        
 
-                DataTable dataTable = (DataTable)dbConnecter.RunSql(sql);
-                
-
-                DataRow dataRow = dataTable.Rows[0];
-
-                fabricationValue.r_id = (int)dataRow.ItemArray[0];
-                fabricationValue.avg_speed = (decimal)dataRow.ItemArray[1];
-                fabricationValue.count = (int)dataRow.ItemArray[2];
-
-                return fabricationValue;
+            for (int i = 0; i < dataTable.Columns.Count; i++) {
+                dicFabricationValue.Add(dataTable.Columns[i].ToString(), dataTable.Rows[0].ItemArray[i]);
             }
-            catch (Exception e)
-            {
-                
-                return GetFabricationValue(1);
-            }
+            
+            return dicFabricationValue;     
             
         }
 
+        public List<string> GetRoadName()
+        {
+            List<string> listRoadName = new List<string>();
+            DbConnecter dbConnecter = new DbConnecter(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\kosta\C#\trafficStatus.mdf;Integrated Security=True;Connect Timeout=30");
+
+            string sql = "SELECT r_name FROM road_data";
+
+            DataTable dataTable = (DataTable)dbConnecter.RunSql(sql);
+
+            for(int i = 0; i < dataTable.Rows.Count; i++)
+            {
+                listRoadName.Add(dataTable.Rows[i].ItemArray[0].ToString());
+            }
+
+            return listRoadName;
+        }
     }
 }
